@@ -7,8 +7,7 @@
 ### 
 ### Comando para ler arquivo sem precisar modifica-lo: **cat**
 ### Comando para apagar arquivo: **rm -rf** "nome do arquivo"
-salve salve garai
-ta porra ta dando errado
+
 
 
 
