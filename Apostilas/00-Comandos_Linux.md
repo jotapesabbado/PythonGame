@@ -30,7 +30,10 @@ rm -rf "nome do arquivo"
 ```
 history
 ```
-
+>Comando para criar diretórios:
+```
+mkdir "nome do diretório"
+```
 
 
 
