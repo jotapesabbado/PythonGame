@@ -16,3 +16,7 @@ ta
 ta
 """
 ```
+>Comando para descobrir o tipo da variável
+```
+type()
+```
