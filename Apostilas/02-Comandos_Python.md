@@ -1,5 +1,5 @@
 # Comandos Python
->Primeiramente, lembre-se de **identar**
+>Primeiramente, lembre-se de **IDENTAR**
 
 >Comando para printar:
 >>sendo "()" para colocar oq quer printar
