@@ -26,6 +26,10 @@ cat "nome do arquivo"
 ```
 rm -rf "nome do arquivo"
 ```
+>Comando para olhar histórico de comando
+```
+history
+```
 
 
 
