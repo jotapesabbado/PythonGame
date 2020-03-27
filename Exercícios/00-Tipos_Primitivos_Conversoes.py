@@ -24,12 +24,12 @@ PEIDAR
 """
 Exercício 5
 """
-#Pois elas armazenam elementos q podem ser identificados com uma chave(comando)
+#Pois a string é um objeto que armazena dados que podem ser acessados por um indíce.
 """
 Exercício 6 e 7
 """
 my_srt2= "eu sou um lixo"
-print(my_srt2[10:15])
+print(my_srt2[-4:])
 print(len(my_srt2)) 
 """
 Exercício 8
@@ -38,8 +38,8 @@ Exercício 8
 """
 Exercício 9 e 10
 """
-my_srt3= "meu cuzin tá doendo"
-print(my_srt3[4:9], my_srt3[13:22])
+my_srt3= "meu \"cuzin\" tá \"doendo\""
+print(my_srt3)
 #com o comando "in"
 x ="cuzin" in my_srt3
 print(x)
@@ -48,7 +48,12 @@ print(x)
 Exercício 12, 13, 14 e 15
 """
 #são valores binários q recebem apenas True ou False
-##Valores vazios, ex: 0, "", etc...
+
+##Não são muitos valores q recebem False, mas os q recebem são: 
+##Valores vazios: (), [], {}, ""
+##O número 0, o valor None, e o valor False
+##Objetos q foram feitos com a função _len_ que retorna 0 ou False
+
 print(bool(my_int))
  
  
