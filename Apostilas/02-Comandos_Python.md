@@ -59,4 +59,10 @@ print(myorder.format(quantity, itemno, price))
 ```
 >Para usar um caracter ilegal em uma string, use **\** (conhecido como caracter de escape)seguido pelo o caracter q você deseja 
 
+## Booleans
+
+>Não são muitos valores q recebem False, mas os q recebem são: 
+>>Valores vazios: (), [], {}, ""
+>>O número 0, o valor None, e o valor False
+>>Objetos q foram feitos com a função _len_ que retorna 0 ou False
 
