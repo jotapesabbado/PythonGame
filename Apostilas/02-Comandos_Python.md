@@ -77,7 +77,7 @@ print(myorder.format(quantity, itemno, price))
 >=
 >+= igual à  x = x + 3
 >-= igual à  x = x - 3
->"tipo de operação"= igual à x = x "operação" 3
+>**"tipo de operação"=** igual à: **x = x "operação" 3**
 
 ## Operadores de comparação:
 >==   Equivalente
@@ -88,7 +88,7 @@ print(myorder.format(quantity, itemno, price))
 ## Python Logical Operators: 
 >and 	Returns True if both statements are true	x < 5 and  x < 10
 >or	Returns True if one of the statements is true	x < 5 or x < 4
->not	Reverse the result, returns False if the result is true	not(x < 5 and x < 10)
+>not	Reverse the result, returns False if the result is true	  not(x < 5 and x < 10)
 
 ## Python Identity Operators
 >Compara objetos para ver se eles são iguais
@@ -97,7 +97,7 @@ print(myorder.format(quantity, itemno, price))
 >>>x is y
 
 ## Python Membership Operators
->São usados para testar se uma sequencia é apresentada em um objeto
+>São usados para ver se o que você procura é apresentado na sequencia de um objeto
 >>in 	Returns True if a sequence with the specified value is present in the object 
 >>>x in y
 >>not in  Returns True if a sequence with the specified value is not present in the object
