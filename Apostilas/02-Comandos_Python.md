@@ -110,3 +110,10 @@ Operator	Name	             Description
 ^	         XOR	             Sets each bit to 1 if only one of two bits is 1
 <<	  Zero fill left shift     	 Shift left by pushing zeros in from the right and let the leftmost bits fall off
 \>>	  Signed right shift	     Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
+
+# List:
+>Para criar uma lista no python, use os "brackets []"
+>Para printar apenas um item da lista, pode-se usar os [] tbm
+```py
+print(my_list[0]) #printou o primeiro objeto da sua my_list
+```
