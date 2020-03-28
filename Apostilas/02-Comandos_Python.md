@@ -80,19 +80,19 @@ print(myorder.format(quantity, itemno, price))
 >**"tipo de operação"=** igual à: **x = x "operação" 3**
 
 ## Operadores de comparação:
->==   Equivalente
->!=   Não equivalente
-><>   Maior que, Menor que
+>==     Equivalente
+>!=     Não equivalente
+><>     Maior que, Menor que
 > <=>=  Maior que ou igual, Menor que ou igual
 
 ## Python Logical Operators: 
->and 	Returns True if both statements are true	x < 5 and  x < 10
->or	Returns True if one of the statements is true	x < 5 or x < 4
+>and 	Returns True if both statements are true	              x < 5 and  x < 10
+>or	    Returns True if one of the statements is true	          x < 5 or x < 4
 >not	Reverse the result, returns False if the result is true	  not(x < 5 and x < 10)
 
 ## Python Identity Operators
 >Compara objetos para ver se eles são iguais
->>is 	Returns True if both variables are the same object
+>>is 	    Returns True if both variables are the same object
 >>is not	Returns True if both variables are not the same object    
 >>>x is y
 
