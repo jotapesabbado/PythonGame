@@ -66,3 +66,47 @@ print(myorder.format(quantity, itemno, price))
 >>O número 0, o valor None, e o valor False
 >>Objetos q foram feitos com a função _len_ que retorna 0 ou False
 
+## Operators
+>**	Exponentiation
+>//	Floor division	
+>%	Modulus
+>/	Division
+>* Multiplicacion 
+
+## Assignment Operators (Assing values to variables):
+>=
+>+= igual à  x = x + 3
+>-= igual à  x = x - 3
+>"tipo de operação"= igual à x = x "operação" 3
+
+## Operadores de comparação:
+>==   Equivalente
+>!=   Não equivalente
+><>   Maior que, Menor que
+> <=>=  Maior que ou igual, Menor que ou igual
+
+## Python Logical Operators: 
+>and 	Returns True if both statements are true	x < 5 and  x < 10
+>or	Returns True if one of the statements is true	x < 5 or x < 4
+>not	Reverse the result, returns False if the result is true	not(x < 5 and x < 10)
+
+## Python Identity Operators
+>Compara objetos para ver se eles são iguais
+>>is 	Returns True if both variables are the same object
+>>is not	Returns True if both variables are not the same object    
+>>>x is y
+
+## Python Membership Operators
+>São usados para testar se uma sequencia é apresentada em um objeto
+>>in 	Returns True if a sequence with the specified value is present in the object 
+>>>x in y
+>>not in  Returns True if a sequence with the specified value is not present in the object
+
+## Python Bitwise Operators:
+> São usados para comparar valores binários
+Operator	Name	             Description
+& 	         AND	             Sets each bit to 1 if both bits are 1
+|	         OR	                 Sets each bit to 1 if one of two bits is 1
+^	         XOR	             Sets each bit to 1 if only one of two bits is 1
+<<	  Zero fill left shift     	 Shift left by pushing zeros in from the right and let the leftmost bits fall off
+\>>	  Signed right shift	     Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
