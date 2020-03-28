@@ -1,8 +1,16 @@
+import math
 """ 
 Exercício 1
 """
-#caralho tu q me fuder né patrão, dei uma olhada rapidinho, mas vou tentar fazer pela lógica 
-# dit: PUTA MERDA EU NEM LEMBRO COMO FAZ BASKHARA
+
+a = 1
+b = 3
+c = -4
+delta = math.sqrt((b ** 2) -4 * a * c)
+
+print("x1", (-b -delta)/2*a) 
+print("x2", (-b +delta)/2*a)
+
 
 """ 
 Exercício 2
@@ -32,7 +40,7 @@ print(not(y>5))
 """ 
 Exercício 5
 """
-#São operadores que comparam objetos para ver se eles são iguais, tendo o resultado em True of False
+#São operadores que comparam elementos para ver se eles são iguais, tendo o resultado em True of False
 print (y is a)
  
 """ 
@@ -42,4 +50,7 @@ Exercício 6
 nego_ney = ["Corona Vírus", "Rei do Inferno", "Mal supremo", "Criador da peste negra", "Matou o miranha", "Criou hentai de zoofilia"]
 print("Bondade" in nego_ney)
 
-
+""" 
+Exercício 7
+"""
+#Pois o == analisa o conteúdo do elemento, procurando ver se é igual, enquanto is analisa o espaço de memóra(não quantidade, mas sim o local).
