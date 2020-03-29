@@ -57,7 +57,7 @@ price = 49.95
 myorder = "I want {2} pieces of item {0} for {1} dollars."
 print(myorder.format(quantity, itemno, price))
 ```
->Para usar um caracter ilegal em uma string, use **\** (conhecido como caracter de escape)seguido pelo o caracter q você deseja 
+>Para usar um caracter ilegal em uma string, use **\\** (conhecido como caracter de escape)seguido pelo o caracter q você deseja 
 
 ## Booleans
 
@@ -111,12 +111,6 @@ Operator	Name	             Description
 <<	  Zero fill left shift     	 Shift left by pushing zeros in from the right and let the leftmost bits fall off
 \>>	  Signed right shift	     Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
 
-# List:
->Para criar uma lista no python, use os "brackets []"
->Para printar apenas um item da lista, pode-se usar os [] tbm
-```py
-print(my_list[0]) #printou o primeiro objeto da sua my_list
-```
 # Data Types para listas
 >List
 >>é uma lista q é ordenada e modificavel. Permite membros duplicados
@@ -126,3 +120,195 @@ print(my_list[0]) #printou o primeiro objeto da sua my_list
 >>é uma lista sem ordem, e inindexavel. Sem membros dúplicados
 >Dictionary
 >>é uma lista sem ordem, modificavel e indexavel. Sem membros dúplicados
+
+## List:
+>Para criar uma lista no python, use os "brackets []"
+>Para printar apenas um item da lista, pode-se usar os [] tbm
+```py
+print(my_list[0]) #printou o primeiro objeto da sua my_list
+```
+>>Use sempre o **-**"número" para fazer de trás pra frente
+>>Use os **:** dentro dos "brackets" [] para falar de tal posição até tal
+>>>Ex:
+```py
+print(my_list[0:10])  #vai ir da posição 0 até 10
+```
+>Para mudar um item da lista, use:
+```py
+my_list[1] = "NegoNey" #mudou o 2° item da lista para NegoNey
+```
+>use **for** para fazer um loop
+"""
+VER COM O JÃO
+"""
+>Para adicionar um item no final da lista, use o metodo **append()**
+>>Ex:
+```py
+thislist = ["Nego", "Ney", "Ruim"]
+thislist.append("ARROMBADO")
+print(thislist)
+```
+>>Para adicionar um item em um lugar especifico, use o metodo insert()
+>>>Ex:
+```py
+thislist = ["apple", "banana", "cherry"]
+thislist.insert(1, "orange") #vai substituir o segundo item por orange
+print(thislist)
+```
+## Remover
+>Para remover um item de uma lista, há alguns comandos:
+>>Método **remove()** para remover itens especificos
+```py
+thislist = ["apple", "banana", "cherry"]
+thislist.remove("banana") #PARA USER UM MÉTODO USE O "variável"."método"
+print(thislist)
+```
+>>Método **pop()** para remover um item em um lugar especifico da variavel (caso n seja especificado o lugar,  ele removerá o último item)
+>>>Ex: 
+```
+thislist = ["apple", "banana", "cherry"]
+thislist.pop()
+print(thislist)
+```
+>>A keyword **del** para remover um item em um lugar especifico da variavel
+```py
+thislist = ["apple", "banana", "cherry"]
+del thislist[0] #No caso de keywords, você terá de usar no começo
+print(thislist)
+```
+>>> caso você digite **del "sua lista"** ele deletará a lista por completo
+
+>>O método **clear** esvazia a lista
+ ## Copiar uma lista
+ >Para copiar uma lista, você pode usar o método **copy()**
+ >>Ex:
+ ```py
+ thislist = ["apple", "banana", "cherry"]
+mylist = thislist.copy()
+print(mylist)
+```
+>>Você pode usar também o **list()** method:
+>>>Ex:
+```py
+thislist = ["apple", "banana", "cherry"]
+mylist = list(thislist)
+print(mylist)
+```
+## Concatenar uma lista
+>use o +
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
