@@ -114,12 +114,18 @@ Operator	Name	             Description
 # Data Types para listas
 >List
 >>é uma lista q é ordenada e modificavel. Permite membros duplicados
+>>>use **[]**
 >Tuple
 >> é uma lista ordenada mas não modificavel. Permite membros duplicados
+>>>use **()**
 >Set
 >>é uma lista sem ordem, e inindexavel. Sem membros dúplicados
+>>>use **{}**
 >Dictionary
 >>é uma lista sem ordem, modificavel e indexavel. Sem membros dúplicados
+{
+  "alguma coisa": "oq vai ser essa uma coisa"
+}
 
 ## List:
 >Para criar uma lista no python, use os "brackets []"
@@ -165,7 +171,7 @@ print(thislist)
 ```
 >>Método **pop()** para remover um item em um lugar especifico da variavel (caso n seja especificado o lugar,  ele removerá o último item)
 >>>Ex: 
-```
+```py
 thislist = ["apple", "banana", "cherry"]
 thislist.pop()
 print(thislist)
