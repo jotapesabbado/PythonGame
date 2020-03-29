@@ -117,3 +117,12 @@ Operator	Name	             Description
 ```py
 print(my_list[0]) #printou o primeiro objeto da sua my_list
 ```
+# Data Types para listas
+>List
+>>é uma lista q é ordenada e modificavel. Permite membros duplicados
+>Tuple
+>> é uma lista ordenada mas não modificavel. Permite membros duplicados
+>Set
+>>é uma lista sem ordem, e inindexavel. Sem membros dúplicados
+>Dictionary
+>>é uma lista sem ordem, modificavel e indexavel. Sem membros dúplicados
