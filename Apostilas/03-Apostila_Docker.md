@@ -20,10 +20,15 @@ sudo docker ps -a
 sudo docker run "nome da imagem"
 ```
 
+### Rodar Containers nomeado:
+```
+sudo docker run --name "nome" "nome da imagem"
+```
+
 ### Rodar Containers tendo interface:
 *O comando "-ti" serve para criar uma interface bash para que você possa estar dentro do container em funcionamento, como é gerada a interface dentro do bash, no momento que você matar o bash (CTRL + D), mata o containner, para sair do bash do container sem matalo use <b>CTRL + P + Q</b>*
 ```
-sudo docker run "nome da imagem" -ti
+sudo docker run -ti "nome da imagem" 
 ```
 
 ### Iniciar Containers:
@@ -72,6 +77,26 @@ sudo docker top ID
 ### Logs do Container:
 ```
 sudo docker logs ID
+```
+
+### IDs dos Container parados:
+```
+sudo docker ps -a -q
+```
+
+### IDs dos Container buscando pelo nome:
+```
+sudo docker ps -f "name=nome_do_container" -q
+```
+
+### Remover todos os Container parados:
+```
+sudo docker rm $(sudo docker ps -a -q)
+```
+
+### Informações do Container:
+```
+sudo docker inspect ID
 ```
 #
 
