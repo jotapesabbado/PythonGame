@@ -78,7 +78,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker start $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker start 'container_id'";
         ;;
 
@@ -86,7 +86,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker stop $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker stop 'container_id'";
         ;;
         
@@ -94,7 +94,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker unpause $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker pause 'container_id'";
         ;;
 
@@ -102,7 +102,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker unpause $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker unpause 'container_id'";
         ;;
 
@@ -110,7 +110,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker rm -f $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker rm -f 'container_id'";
         ;;
 
@@ -118,7 +118,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker stats $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker stats 'container_id'";
         ;;
 
@@ -126,7 +126,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker top $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker top $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker top 'container_id'";
         ;;
 
@@ -134,7 +134,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker logs $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker logs 'container_id'";
         ;;
 
@@ -142,7 +142,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker start $(sudo docker ps -f "name=$container_name" -q)
+          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker inspect 'container_id'";
         ;;
 
