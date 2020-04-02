@@ -94,7 +94,7 @@ while [ $opt != '' ]
           docker_containers;
           printf "Nome do container:";
           read container_name;
-          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)
+          sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker pause 'container_id'";
         ;;
 
