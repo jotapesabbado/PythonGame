@@ -27,5 +27,5 @@ my_dick = {
     "ob3": "batata"
 }
 my_dick["ob4"] ="Adam Sandler"
-print(my_dick)git
+print(my_dick)
 
