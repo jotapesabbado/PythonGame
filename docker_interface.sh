@@ -1,39 +1,71 @@
-#!/bin/bash
+#!/bin/sh
+show_menu(){
+    normal=`echo "\033[m"`
+    menu=`echo "\033[36m"` #Blue
+    number=`echo "\033[33m"` #yellow
+    bgred=`echo "\033[41m"`
+    fgred=`echo "\033[31m"`
+    printf "\n${menu}*********************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Listar Containers ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Listar Containers inativos ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Rodar Containers ${normal}\n"
+    printf "${menu}*********************************************${normal}\n"
+    printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
+    read opt
+}
 
-# PS3='Digite a ação de Docker que deseja realizar:'
+option_picked(){
+    msgcolor=`echo "\033[01;31m"` # bold red
+    normal=`echo "\033[00;00m"` # normal white
+    bgred=`echo "\033[41m"`
+    message=${@:-"${normal}Error: No message passed"}
+    printf "${bgred}Comando realizado: \n${normal}"
+    printf "${msgcolor}${message}${normal}"
+}
 
-read -p "Digite a ação de Docker que deseja realizar : " selected_opt
+clear
+show_menu
+while [ $opt != '' ]
+    do
+    if [ $opt = '' ]; then
+      exit;
+    else
+      clear
 
-options=(
-	"Listar Containers"
-	"Listar Containers inativos"
-	"Rodar Containers"
-	"Quit"
-)
+      case $opt in
+        1) 
+          sudo docker ps
+          option_picked "sudo docker ps";
+        ;;
 
-select opt in "${options[$selected_opt]}"
-do
-    case $opt in
-        "Option 1")
-            echo "you chose choice 1"
-	    echo `git status`
-	    git status
-            ;;
-        "Option 2")
-            echo "you chose choice 2"
-            ;;
-        "Option 3")
-            echo "you chose choice $REPLY which is $opt"
-            ;;
-        "Quit")
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
+        2)
+          sudo docker ps -a 
+          option_picked "sudo docker ps -a";
+        ;;
+
+        3) 
+          printf "Nome do container:";
+          read container_name;
+          printf "\n LISTA DE IMAGENS: \n";
+          printf "*********************************************\n"
+          sudo docker images
+          printf "\n Nome da imagem:";
+          read iso_name;
+          sudo docker run --name $container_name $iso_name
+          option_picked "sudo docker run --name $container_name $iso_name";
+        ;;
+
+        x)exit;
+        ;;
+
+        \n)exit;
+        ;;
+
+        *)
+          option_picked "Escolha uma opções do menu";
+        ;;
+      esac
+
+      show_menu
+    fi
 done
-
-https://askubuntu.com/questions/1705/how-can-i-create-a-select-menu-in-a-shell-script
-https://askubuntu.com/questions/38661/how-do-i-run-sh-scripts
-https://stackoverflow.com/questions/5762233/how-can-i-run-git-commands-via-shell-script
-https://bash.cyberciti.biz/guide/Getting_User_Input_Via_Keyboard
-https://www.youtube.com/watch?v=OZJZMbxSiuQ&list=PLf-O3X2-mxDkiUH0r_BadgtELJ_qyrFJ_&index=9
