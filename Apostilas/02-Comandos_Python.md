@@ -126,7 +126,7 @@ Operator	Name	             Description
 {
   "alguma coisa": "oq vai ser essa uma coisa"
 }
-
+# A maioria das data types de collectione
 ## List:
 >Para criar uma lista no python, use os "brackets []"
 >Para printar apenas um item da lista, pode-se usar os [] tbm
@@ -143,10 +143,6 @@ print(my_list[0:10])  #vai ir da posição 0 até 10
 ```py
 my_list[1] = "NegoNey" #mudou o 2° item da lista para NegoNey
 ```
->use **for** para fazer um loop
-"""
-VER COM O JÃO
-"""
 >Para adicionar um item no final da lista, use o metodo **append()**
 >>Ex:
 ```py
@@ -203,118 +199,36 @@ print(mylist)
 ## Concatenar uma lista
 >use o +
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Tuples
+>tuple é uma lista imodificavel, sendo mais difícil para o usuário mexer. 
+>>Como mudar os valores de um tuple
+>>Você deve transforma-lo em uma list, depois de volta para o tuple
+```py
+x = ("apple", "banana", "cherry")
+y = list(x)
+y[1] = "kiwi"
+x = tuple(y)
+print(x)
+```
+### Tuples methods:
+>count()
+>>retorna o número de vezes que um valor específico ocorre em uma tuple
+>index()
+>>Procura na tuple por um valor específico e depois retorna a posição onde foi encontrado.
+## Set
+>uma boa forma de conseguir fazer uma lista bem segura, é oo Set, mas com essa segurança tu acaba por limitar muito o funcionamento da sua lista.
+>Para adicionar mais de um item no tuple
+>>update("1item", "2item")
+### Set methods 
+>Returns a set contendo a diferença entre dois ou mais sets
+>>diference()
+>Remove os itens nesse set que também estão incluídos em outros set específicados
+>>difference_update()
+>Remove o item especificado
+>>discord()
+> Returns a set, que é  interseção de dois ou outros sets
+>>intersection()
+>Removes the items in this set que não estão presente em outros sets específicados
+>>intersection_update()
+>Compara dois sets e procura se tem interseção entre eles, caso tenha, será false
+>>isdisjoint()
