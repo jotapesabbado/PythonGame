@@ -98,61 +98,61 @@ while [ $opt != '' ]
         ;;
 
         6)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         7)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker start $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         8)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
         
         9)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         10)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         11)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         12)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         13)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker top $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker top $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         14)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         15)
-          container_name=read_container_name;
+          read_container_name;
           sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
