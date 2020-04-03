@@ -22,7 +22,7 @@ show_menu(){
     printf "${menu}**${number} 12)${menu} Status do Container ${normal}\n"
     printf "${menu}**${number} 13)${menu} Processos do Container ${normal}\n"
     printf "${menu}**${number} 14)${menu} Logs do Container ${normal}\n"
-    printf "${menu}**${number} 15)${menu} Informações do Container ${normal}\n"
+    printf "${menu}**${number} 15)${menu} Inspecionar do Container ${normal}\n"
     printf "\n${menu}*********************************************${normal}\n"
     printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
     read opt
@@ -153,7 +153,7 @@ while [ $opt != '' ]
 
         15)
           container_name=read_container_name;
-          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)
           option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
