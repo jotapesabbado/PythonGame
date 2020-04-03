@@ -60,7 +60,7 @@ read_container_name(){
   printf "Nome do container:";
   read container_name;
   clear;
-  echo $container_name
+  echo $container_name;
 }
 
 read_container_memory(){
@@ -69,16 +69,16 @@ read_container_memory(){
   printf "\n Consumo de memoria(usa a silga m, gb, etc):";
   read container_memory;
   clear;
-  echo $container_memory
+  echo $container_memory;
 }
 
 read_container_cpu(){
   printf "\n CONSUMO ATUAL DE CPU: \n";
-  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
   printf "\n Consumo de CPU:";
   read container_cpu;
   clear;
-  echo $container_cpu
+  echo $container_cpu;
 }
 
 clear
@@ -187,14 +187,14 @@ while [ $opt != '' ]
           read_container_name;
           read_container_memory;
           sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q);
-          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+          option_picked "sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         16)
           read_container_name;
           read_container_cpu;
-          sudo docker --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q);
-          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+          sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         17)
