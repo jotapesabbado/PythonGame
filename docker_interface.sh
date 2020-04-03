@@ -125,8 +125,8 @@ while [ $opt != '' ]
           printf "Consumo de CPU:";
           read container_cpu;
 
-          sudo docker run -ti --name $container_name $iso_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
-          option_picked "sudo docker run -ti --name $container_name $iso_name --memory $container_memory --cpu-shares $container_cpu $iso_name";
+          sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
+          option_picked "sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name";
         ;;
 
         6)
