@@ -126,7 +126,7 @@ Operator	Name	             Description
 {
   "alguma coisa": "oq vai ser essa uma coisa"
 }
-
+# A maioria das data types de collectione
 ## List:
 >Para criar uma lista no python, use os "brackets []"
 >Para printar apenas um item da lista, pode-se usar os [] tbm
@@ -143,10 +143,6 @@ print(my_list[0:10])  #vai ir da posição 0 até 10
 ```py
 my_list[1] = "NegoNey" #mudou o 2° item da lista para NegoNey
 ```
->use **for** para fazer um loop
-"""
-VER COM O JÃO
-"""
 >Para adicionar um item no final da lista, use o metodo **append()**
 >>Ex:
 ```py
@@ -203,118 +199,103 @@ print(mylist)
 ## Concatenar uma lista
 >use o +
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Tuples
+>tuple é uma lista imodificavel, sendo mais difícil para o usuário mexer. 
+>>Como mudar os valores de um tuple
+>>Você deve transforma-lo em uma list, depois de volta para o tuple
+```py
+x = ("apple", "banana", "cherry")
+y = list(x)
+y[1] = "kiwi"
+x = tuple(y)
+print(x)
+```
+### Tuples methods:
+>count()
+>>retorna o número de vezes que um valor específico ocorre em uma tuple
+>index()
+>>Procura na tuple por um valor específico e depois retorna a posição onde foi encontrado.
+## Set
+>uma boa forma de conseguir fazer uma lista bem segura, é oo Set, mas com essa segurança tu acaba por limitar muito o funcionamento da sua lista.
+>Para adicionar mais de um item no tuple
+>>**update("1item", "2item")**
+### Set methods 
+>Returns a set contendo a diferença entre dois ou mais sets
+>>diference()
+>Remove os itens nesse set que também estão incluídos em outros set específicados
+>>difference_update()
+>Remove o item especificado
+>>discord()
+> Returns a set, que é  interseção de dois ou outros sets
+>>intersection()
+>Removes the items in this set que não estão presente em outros sets específicados
+>>intersection_update()
+>Compara dois sets e procura se tem interseção entre eles, caso tenha, será false
+>>isdisjoint()
+>Retorna um set com todos itens do outro set, mas sem aqueles que estão presente nos 2
+>>symmetric_difference()
+>>>Ex: 
+>>>my_set3 = "my_set".**symmetric_difference("my_set2")**
+>Remove os itens iguais dos sets e retorna com um set com todos itens que eram diferentes
+>>symmetric_difference_updat()
+>>>Ex
+```py
+
+
+x = {"apple", "banana", "cherry"}
+y = {"google", "microsoft", "apple"}
+
+x.symmetric_difference_update(y) 
+
+print(x) #vai printar um set assim (sem o apple): 'google', 'banana', 'cherry', 'microsoft'
+```
+>Retorna um set contendo a união de sets
+>>union()
+>Atualiza os itens do set especificado adicionando os itens de outro set especificado
+>>update()
+>>>Ex: "set que vai atualizar".update("set atualizador")
+
+
+
+
+
+
+
+
+
+
+## Dictionary
+>com o dict você pode extrair informações direto dele apenas pedindo ao index (que é uma string).
+```py
+my_dick = {
+    "ob1": "banana", #"ob1" é uma key, enquanto "banana" é um value
+    "ob2": "maça",
+    "ob3": "batata"
+}
+```
+### Dictionary methods
+>Cria um dictonary com as keys e valores específicados
+>>fromkeys()
+>>>Ex:
+```py
+x = ('key1', 'key2', 'key3') #keys que serão usadas
+y = 0 #valor que será atribuido às keys
+
+thisdict = dict.fromkeys(x, y) #criou a key
+
+print(thisdict) #printara key1:0, key2:0, key3:0
+```	
+>Retorna com o value da key específicada
+>>get("key")	
+>	Retorna um tuple contendo cada par de key e value
+>>items()
+>Retorna uma lista contendo todas a keys do dict
+>>keys()
+>Remove o último key-value inserido
+>>popitem()
+>Retorna o valor de uma key específicada, caso a key não exista ele insere a key com o valor específicado
+>>setdefault("a key", "o valor caso não exista a key")
+>Dá update no dict com o key-value específicados
+>>update("key", "value")
+>Retorna com uma lista de todos valores do dict
+>>values()
