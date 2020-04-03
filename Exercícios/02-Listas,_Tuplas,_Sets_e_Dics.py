@@ -29,3 +29,4 @@ my_dick = {
 my_dick["ob4"] ="Adam Sandler"
 print(my_dick)
 
+#resto dos exercícios na apostila
