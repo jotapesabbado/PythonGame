@@ -22,7 +22,13 @@ show_menu(){
     printf "${menu}**${number} 12)${menu} Status do Container ${normal}\n"
     printf "${menu}**${number} 13)${menu} Processos do Container ${normal}\n"
     printf "${menu}**${number} 14)${menu} Logs do Container ${normal}\n"
-    printf "${menu}**${number} 15)${menu} Inspecionar do Container ${normal}\n"
+    printf "${menu}\nUPDATE CONTAINERS EXPECIFICOS:${normal}\n\n"
+    printf "${menu}**${number} 15)${menu} Alterar memoria do Container ${normal}\n"
+    printf "${menu}**${number} 16)${menu} Alaterar CPU do Container ${normal}\n"
+    printf "${menu}\nINSPECIONAR CONTAINERS EXPECIFICOS:${normal}\n\n"
+    printf "${menu}**${number} 17)${menu} Inspecionar do Container ${normal}\n"
+    printf "${menu}**${number} 18)${menu} Consumo de memoria do Container ${normal}\n"
+    printf "${menu}**${number} 19)${menu} Consumo de CPU do Container ${normal}\n"
     printf "\n${menu}*********************************************${normal}\n"
     printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
     read opt
@@ -55,6 +61,24 @@ read_container_name(){
   read container_name;
   clear;
   echo $container_name
+}
+
+read_container_memory(){
+  printf "\n CONSUMO ATUAL DE MEMÓRIA: \n";
+  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+  printf "\n Consumo de memoria(usa a silga m, gb, etc):";
+  read container_memory;
+  clear;
+  echo $container_memory
+}
+
+read_container_cpu(){
+  printf "\n CONSUMO ATUAL DE CPU: \n";
+  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+  printf "\n Consumo de CPU:";
+  read container_cpu;
+  clear;
+  echo $container_cpu
 }
 
 clear
@@ -90,11 +114,19 @@ while [ $opt != '' ]
         5) 
           printf "Nome do container:";
           read container_name;
+          
           docker_images;
           printf "\n Nome da imagem:";
           read iso_name;
-          sudo docker run -ti --name $container_name $iso_name;
-          option_picked "sudo docker run -ti --name $container_name $iso_name";
+
+          printf "Consumo de memoria(usa a silga m, gb, etc):";
+          read container_memory;
+
+          printf "Consumo de CPU:";
+          read container_cpu;
+
+          sudo docker run -ti --name $container_name $iso_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
+          option_picked "sudo docker run -ti --name $container_name $iso_name --memory $container_memory --cpu-shares $container_cpu $iso_name";
         ;;
 
         6)
@@ -153,8 +185,34 @@ while [ $opt != '' ]
 
         15)
           read_container_name;
+          read_container_memory;
+          sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        16)
+          read_container_name;
+          read_container_cpu;
+          sudo docker --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        17)
+          read_container_name;
           sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q);
           option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        18)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory";
+        ;;
+
+        19)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu";
         ;;
 
         x)exit;
