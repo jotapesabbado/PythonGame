@@ -59,3 +59,8 @@ print(bool(my_int))
  
 ###0, ou seja, False
 
+
+
+
+
+

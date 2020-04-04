@@ -98,6 +98,36 @@ sudo docker rm $(sudo docker ps -a -q)
 ```
 sudo docker inspect ID
 ```
+
+### Verificar consumo de memoria do container:
+```
+sudo docker inspect ID | grep -i memory
+```
+
+### Criar container definindo consumo de memoria:
+```
+sudo docker run --memory "memoria" 
+```
+
+### Alterar consumo de memoria em container existente:
+```
+sudo docker update -m "memoria" "container_id" 
+```
+
+### Verificar consumo de cpu do container:
+```
+sudo docker inspect ID | grep -i cpu
+```
+
+### Criar container definindo consumo de cpu:
+```
+sudo docker run --cpu-shares "consumo_cpu" 
+```
+
+### Alterar consumo de cpu em container existente:
+```
+sudo docker update --cpu-shares "consumo_cpu" "container_id" 
+```.
 #
 
 ## Soluções

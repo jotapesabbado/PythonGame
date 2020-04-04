@@ -6,19 +6,30 @@ show_menu(){
     bgred=`echo "\033[41m"`
     fgred=`echo "\033[31m"`
     printf "\n${menu}*********************************************${normal}\n"
+    printf "${menu}\nCOMANDOS PARA TODOS OS CONTAINERS:${normal}\n\n"
     printf "${menu}**${number} 1)${menu} Listar Containers ${normal}\n"
     printf "${menu}**${number} 2)${menu} Listar Containers inativos ${normal}\n"
-    printf "${menu}**${number} 3)${menu} Rodar Containers ${normal}\n"
-    printf "${menu}**${number} 4)${menu} Iniciar Containers ${normal}\n"
-    printf "${menu}**${number} 5)${menu} Parar Containers ${normal}\n"
-    printf "${menu}**${number} 6)${menu} Pusar Containers ${normal}\n"
-    printf "${menu}**${number} 7)${menu} DesPausar Containers ${normal}\n"
-    printf "${menu}**${number} 8)${menu} Remover Containers ${normal}\n"
-    printf "${menu}**${number} 9)${menu} Status do Container ${normal}\n"
-    printf "${menu}**${number} 10)${menu} Processos do Container ${normal}\n"
-    printf "${menu}**${number} 11)${menu} Logs do Container ${normal}\n"
-    printf "${menu}**${number} 12)${menu} Informações do Container ${normal}\n"
-    printf "${menu}*********************************************${normal}\n"
+    printf "${menu}**${number} 3)${menu} Listar Imagens ${normal}\n"
+    printf "${menu}**${number} 4)${menu} Remover todos os Containers inativos ${normal}\n"
+    printf "${menu}\nCOMANDOS PARA CONTAINERS EXPECIFICOS:${normal}\n\n"
+    printf "${menu}**${number} 5)${menu} Rodar Containers ${normal}\n"
+    printf "${menu}**${number} 6)${menu} Entrar em um Container ativo ${normal}\n"
+    printf "${menu}**${number} 7)${menu} Iniciar Containers ${normal}\n"
+    printf "${menu}**${number} 8)${menu} Parar Containers ${normal}\n"
+    printf "${menu}**${number} 9)${menu} Pusar Containers ${normal}\n"
+    printf "${menu}**${number} 10)${menu} DesPausar Containers ${normal}\n"
+    printf "${menu}**${number} 11)${menu} Remover Containers ${normal}\n"
+    printf "${menu}**${number} 12)${menu} Status do Container ${normal}\n"
+    printf "${menu}**${number} 13)${menu} Processos do Container ${normal}\n"
+    printf "${menu}**${number} 14)${menu} Logs do Container ${normal}\n"
+    printf "${menu}\nUPDATE CONTAINERS EXPECIFICOS:${normal}\n\n"
+    printf "${menu}**${number} 15)${menu} Alterar memoria do Container ${normal}\n"
+    printf "${menu}**${number} 16)${menu} Alaterar CPU do Container ${normal}\n"
+    printf "${menu}\nINSPECIONAR CONTAINERS EXPECIFICOS:${normal}\n\n"
+    printf "${menu}**${number} 17)${menu} Inspecionar do Container ${normal}\n"
+    printf "${menu}**${number} 18)${menu} Consumo de memoria do Container ${normal}\n"
+    printf "${menu}**${number} 19)${menu} Consumo de CPU do Container ${normal}\n"
+    printf "\n${menu}*********************************************${normal}\n"
     printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
     read opt
 }
@@ -44,6 +55,32 @@ docker_containers(){
   sudo docker ps -a
 }
 
+read_container_name(){
+  docker_containers;
+  printf "Nome do container:";
+  read container_name;
+  clear;
+  echo $container_name;
+}
+
+read_container_memory(){
+  printf "\n CONSUMO ATUAL DE MEMÓRIA: \n";
+  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+  printf "\n Consumo de memoria(usa a silga m, gb, etc):";
+  read container_memory;
+  clear;
+  echo $container_memory;
+}
+
+read_container_cpu(){
+  printf "\n CONSUMO ATUAL DE CPU: \n";
+  sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
+  printf "\n Consumo de CPU:";
+  read container_cpu;
+  clear;
+  echo $container_cpu;
+}
+
 clear
 show_menu
 while [ $opt != '' ]
@@ -55,95 +92,127 @@ while [ $opt != '' ]
 
       case $opt in
         1) 
-          sudo docker ps
+          sudo docker ps;
           option_picked "sudo docker ps";
         ;;
 
         2)
-          sudo docker ps -a 
+          sudo docker ps -a; 
           option_picked "sudo docker ps -a";
         ;;
 
-        3) 
-          printf "Nome do container:";
-          read container_name;
-          docker_images;
-          printf "\n Nome da imagem:";
-          read iso_name;
-          sudo docker run -ti --name $container_name $iso_name
-          option_picked "sudo docker run -ti --name $container_name $iso_name";
+        3)
+          sudo docker images; 
+          option_picked "sudo docker images";
         ;;
 
         4)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker start 'container_id'";
+          sudo docker rm -f $(sudo docker ps -a -q);
+          option_picked "sudo docker rm $(sudo docker ps -a -q)";
         ;;
 
-        5)
-          docker_containers;
+        5) 
           printf "Nome do container:";
           read container_name;
-          sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker stop 'container_id'";
+          
+          docker_images;
+          printf "\n Nome da imagem:";
+          read iso_name;
+
+          printf "Consumo de memoria(usa a silga m, gb, etc):";
+          read container_memory;
+
+          printf "Consumo de CPU:";
+          read container_cpu;
+
+          sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
+          option_picked "sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name";
         ;;
-        
+
         6)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker pause 'container_id'";
+          read_container_name;
+          sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         7)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker unpause 'container_id'";
+          read_container_name;
+          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         8)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker rm -f 'container_id'";
+          read_container_name;
+          sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
-
+        
         9)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker stats 'container_id'";
+          read_container_name;
+          sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         10)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker top $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker top 'container_id'";
+          read_container_name;
+          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         11)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker logs 'container_id'";
+          read_container_name;
+          sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q)";
         ;;
 
         12)
-          docker_containers;
-          printf "Nome do container:";
-          read container_name;
-          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)
-          option_picked "sudo docker inspect 'container_id'";
+          read_container_name;
+          sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        13)
+          read_container_name;
+          sudo docker top $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker top $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        14)
+          read_container_name;
+          sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        15)
+          read_container_name;
+          read_container_memory;
+          sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        16)
+          read_container_name;
+          read_container_cpu;
+          sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        17)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        18)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory";
+        ;;
+
+        19)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu";
         ;;
 
         x)exit;
