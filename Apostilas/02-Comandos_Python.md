@@ -285,17 +285,89 @@ thisdict = dict.fromkeys(x, y) #criou a key
 
 print(thisdict) #printara key1:0, key2:0, key3:0
 ```	
->Retorna com o value da key específicada
->>get("key")	
->	Retorna um tuple contendo cada par de key e value
->>items()
->Retorna uma lista contendo todas a keys do dict
->>keys()
->Remove o último key-value inserido
->>popitem()
->Retorna o valor de uma key específicada, caso a key não exista ele insere a key com o valor específicado
->>setdefault("a key", "o valor caso não exista a key")
->Dá update no dict com o key-value específicados
->>update("key", "value")
->Retorna com uma lista de todos valores do dict
+#### Retorna com o value da key específicada
+>get("key")	
+####	Retorna um tuple contendo cada par de key e value
+>items()
+#### Retorna uma lista contendo todas a keys do dict
+>keys()
+#### Remove o último key-value inserido
+>popitem()
+#### Retorna o valor de uma key específicada, caso a key não exista ele insere a key com o valor específicado
+>setdefault("a key", "o valor caso não exista a key")
+#### Dá update no dict com o key-value específicados
+>update("key", "value")
+#### Retorna com uma lista de todos valores do dict
 >>values()
+
+
+## if ... else
+>Python suporta a lógica usual da matemática
+>>Igual:      
+>>>**==**
+>>Não é igual
+>>>**!=**
+>>Menor que
+>>> **<**
+>>Menor que ou igual que
+>>> **<=**
+>>Maior que
+>>> **>**
+>>Maior que ou igual que
+>>> **>=**
+### if statement
+>Ex:
+>>
+```py
+a = 33
+b = 200
+if b > a:
+  print("b é maior que a") #como b é realmente maior que a (true), ele vai printar oq está escrito
+  ```
+### elif statement
+>a keyword **elif** teria o mesmo significado de: se a condição anterior não for verdade, então tente essa
+>>Ex
+```py
+a = 33
+b = 33
+if b > a:
+  print("b é maior que a")
+elif a == b:
+  print("a e b são iguais")
+```
+### else statement
+>a keyword **else** pega tudo que não foi pego pelas condições anteriores
+>caso o **if** der errado, ele rodará o else
+>>
+```py
+a = 200
+b = 33
+if b > a:
+  print("b é maior que a")
+elif a == b:
+  print("a e b são iguais")
+else:
+  print("a é maior que b")
+  ```
+### short hand if ... else
+>caso você queira apenas escrever um statement curto, você pode fazer tudo em uma mesma linha
+>>Ex:
+```py
+a = 2
+b = 330
+print("A") if a > b else print("B")
+```
+### and  
+> é usado para combinar 2 statement
+>>Ex
+```py
+a=30
+b=30
+c=60
+
+if a = b and c > a:
+ print("carai mermão ta certo :)")
+```
+### or
+> também é usado para combinar 2 statement, mas se caso o primeiro esteja errado e o segundo certo, ele dará True mesmo assim
+
