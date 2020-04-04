@@ -1,5 +1,5 @@
 """
-Exercício 1, 2, 3, 4
+Exercício 1, 2, 3, 4, 5
 """
 # são estruturas que rodarão o que está dentro dela caso a condição da estrutura seja cumprida
 
@@ -23,7 +23,7 @@ elif x > y:
     print("x é maior que y")
 
 """
-Exercício 5
+Exercício 6, 7, 8, 9, 10
 """
 #caso o if de errado, ele irá rodar o else
 
@@ -31,6 +31,17 @@ Exercício 5
 
 #é pra aumentar a qualidade do seu código, fazendo mais coisas em menos espaço
 
-x = 30
 
- 
+
+print(z)
+
+
+
+"""
+Exercício 12 e 14
+"""
+#aumenta a qualidade do seu cod mas ao mesmo tempo ele fica limitado 
+x3 = 10
+if x3 > 10:
+ pass
+#use a palavra a keyword "pass" na estutura de condição
