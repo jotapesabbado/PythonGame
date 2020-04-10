@@ -115,7 +115,7 @@ while [ $opt != '' ]
           printf "Nome do container:";
           read container_name;
           
-          #docker_images;
+          docker_images;
           printf "\n Nome da imagem:";
           read iso_name;
 
