@@ -115,19 +115,25 @@ while [ $opt != '' ]
           printf "Nome do container:";
           read container_name;
           
-          docker_images;
+          #docker_images;
           printf "\n Nome da imagem:";
           read iso_name;
 
           printf "Consumo de memoria(usa a silga m, gb, etc):";
           read container_memory;
-          command_memory=[ -z "$container_memory" ] && "--memory $container_memory" || ""
+          if [ ! -z "$container_memory" -a "$container_memory" != " " ]; then
+            command_memory="--memory $container_memory";
+          else
+            command_memory="";
+          fi
 
           printf "Consumo de CPU:";
           read container_cpu;
-          command_cpu=[ -z "$container_cpu" ] && "--cpu-shares $container_cpu" || ""
-
-          #[  -z "$container_name" ] && echo --name
+          if [ ! -z "$container_cpu" -a "$container_cpu" != " " ]; then
+            command_cpu="--cpu-shares $container_cpu";
+          else
+            command_cpu="";
+          fi
 
 
           #sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
