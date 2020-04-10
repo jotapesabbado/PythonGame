@@ -128,6 +128,8 @@ sudo docker run --cpu-shares "consumo_cpu"
 ```
 sudo docker update --cpu-shares "consumo_cpu" "container_id" 
 ```
+
+
 #
 
 ## Soluções
