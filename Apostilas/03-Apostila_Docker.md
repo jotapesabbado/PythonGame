@@ -127,12 +127,15 @@ sudo docker run --cpu-shares "consumo_cpu"
 ### Alterar consumo de cpu em container existente:
 ```
 sudo docker update --cpu-shares "consumo_cpu" "container_id" 
-```.
+```
 #
 
 ## Soluções
 ### *Comandos docker não funcionam*
 * O CML "docker" precisa de nivel de permissinamento sudo para rodar, então todo comando docker deve possuir ``sudo docker COMAND``.
+
+### *Virtual Box Linux não mostra todo o script*
+* O virtual box tem umas tretas na hora de redimencionar uma maquina virtual, ai se tu tens uma interface que ocupa um espaço maior ela fica escondida. Esse link resolve tudo (https://www.youtube.com/watch?v=N6M1GUFw7R4)
 
 
 
