@@ -121,16 +121,19 @@ while [ $opt != '' ]
 
           printf "Consumo de memoria(usa a silga m, gb, etc):";
           read container_memory;
+          command_memory=[ -z "$container_memory" ] && "--memory $container_memory" || ""
 
           printf "Consumo de CPU:";
           read container_cpu;
+          command_cpu=[ -z "$container_cpu" ] && "--cpu-shares $container_cpu" || ""
 
           #[  -z "$container_name" ] && echo --name
 
 
           #sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
-          eval "sudo docker run -ti $([ -z "$container_name" ] && --name $container_name)  ([ -z "$container_memory" ] && --memory $container_memory) ([ -z "$container_cpu" ] && echo --cpu-shares $container_cpu) $iso_name";
-          option_picked "sudo docker run -ti $([ -z "$container_name" ] && --name $container_name)  ([ -z "$container_memory" ] && --memory $container_memory) ([ -z "$container_cpu" ] && echo --cpu-shares $container_cpu) $iso_name";
+          command_line="sudo docker run -ti --name $container_name $command_memory $command_cpu $iso_name";
+          eval $command_line;
+          option_picked $command_line;
         ;;
 
         6)
