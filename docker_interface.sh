@@ -5,34 +5,77 @@ show_menu(){
     number=`echo "\033[33m"` #yellow
     bgred=`echo "\033[41m"`
     fgred=`echo "\033[31m"`
-    printf "\n${menu}*********************************************${normal}\n"
-    printf "${menu}\nCOMANDOS PARA TODOS OS CONTAINERS:${normal}\n\n"
-    printf "${menu}**${number} 1)${menu} Listar Containers ${normal}\n"
-    printf "${menu}**${number} 2)${menu} Listar Containers inativos ${normal}\n"
-    printf "${menu}**${number} 3)${menu} Listar Imagens ${normal}\n"
-    printf "${menu}**${number} 4)${menu} Remover todos os Containers inativos ${normal}\n"
-    printf "${menu}\nCOMANDOS PARA CONTAINERS EXPECIFICOS:${normal}\n\n"
-    printf "${menu}**${number} 5)${menu} Rodar Containers ${normal}\n"
-    printf "${menu}**${number} 6)${menu} Entrar em um Container ativo ${normal}\n"
-    printf "${menu}**${number} 7)${menu} Iniciar Containers ${normal}\n"
-    printf "${menu}**${number} 8)${menu} Parar Containers ${normal}\n"
-    printf "${menu}**${number} 9)${menu} Pusar Containers ${normal}\n"
-    printf "${menu}**${number} 10)${menu} DesPausar Containers ${normal}\n"
-    printf "${menu}**${number} 11)${menu} Remover Containers ${normal}\n"
-    printf "${menu}**${number} 12)${menu} Status do Container ${normal}\n"
-    printf "${menu}**${number} 13)${menu} Processos do Container ${normal}\n"
-    printf "${menu}**${number} 14)${menu} Logs do Container ${normal}\n"
-    printf "${menu}\nUPDATE CONTAINERS EXPECIFICOS:${normal}\n\n"
-    printf "${menu}**${number} 15)${menu} Alterar memoria do Container ${normal}\n"
-    printf "${menu}**${number} 16)${menu} Alaterar CPU do Container ${normal}\n"
-    printf "${menu}\nINSPECIONAR CONTAINERS EXPECIFICOS:${normal}\n\n"
-    printf "${menu}**${number} 17)${menu} Inspecionar Container ${normal}\n"
-    printf "${menu}**${number} 18)${menu} Consumo de memoria do Container ${normal}\n"
-    printf "${menu}**${number} 19)${menu} Consumo de CPU do Container ${normal}\n"
-    printf "${menu}**${number} 20)${menu} Volume montado corretamente ${normal}\n"
-    printf "\n${menu}*********************************************${normal}\n"
-    printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
-    read opt
+
+    declare -a comandos_para_todos_container=(
+      "Listar Containers"
+      "Listar Containers inativos"
+      "Listar Imagens"
+      "Remover todos os Containers inativos"
+    );
+
+    declare -a comandos_para_container_expecificos=(
+      "Rodar Containers"
+      "Entrar em um Container ativo"
+      "Iniciar Containers"
+      "Parar Containers"
+      "Pusar Containers"
+      "DesPausar Containers"
+      "Remover Containers"
+      "Status do Container"
+      "Processos do Container"
+      "Logs do Container"
+    );
+
+    declare -a update_para_container_expecificos=(
+      "Alterar memoria do Container"
+      "Alterar CPU do Container"
+    );
+
+    declare -a inspecionar_container_expecificos=(
+      "Inspecionar Container"
+      "Consumo de memoria do Container"
+      "Consumo de CPU do Container"
+      "Volume montado corretamente"
+    );
+
+  declare -A topic0=(
+    [title]='COMANDOS PARA TODOS OS CONTAINERS:'
+    [commands]='comandos_para_todos_container'
+  )
+
+  declare -A topic1=(
+    [title]='COMANDOS PARA CONTAINERS EXPECIFICOS'
+    [commands]='comandos_para_container_expecificos'
+  )
+
+  declare -A topic2=(
+    [title]='UPDATE CONTAINERS EXPECIFICOS'
+    [commands]='update_para_container_expecificos'
+  )
+
+  declare -A topic3=(
+    [title]='INSPECIONAR CONTAINERS EXPECIFICOS'
+    [commands]='inspecionar_container_expecificos'
+  )
+
+  declare -n topic
+
+  #echo ${inspecionar_container_expecificos[@]}
+
+  printf "\n${menu}*********************************************${normal}\n"
+  cont=1
+  for topic in ${!topic@}; do
+    printf "${menu}\n${topic[title]}:${normal}\n\n"
+    eval 'array_of_commands=("${'${topic[commands]}'[@]}");';
+    for command in "${array_of_commands[@]}"
+      do
+        printf "${menu}**${number} $cont)${menu} $command ${normal}\n"
+        ((cont+=1))
+      done
+  done
+  printf "\n${menu}*********************************************${normal}\n"
+  printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
+  read opt
 }
 
 option_picked(){

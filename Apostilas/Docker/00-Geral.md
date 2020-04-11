@@ -129,6 +129,85 @@ sudo docker run --cpu-shares "consumo_cpu"
 sudo docker update --cpu-shares "consumo_cpu" "container_id" 
 ```
 
+## Volumes:
+
+### Inspecionar para valizar a montagem do volume:
+```
+sudo docker inspect -f {{.Mounts}} nome_container
+```
+
+### Container dataonly (criar container que utiliza um container dataonly como volume):
+```
+// Container dataonly
+sudo docker create -v diretorio/host:diretorio/container --name container_dataonly
+
+// Dessa forma o container sera criado utilizando o volume do container dataonly como centralizador dos dados
+sudo docker run --volume-from container_dataonly 
+```
+
+## Dockerfile
+
+### FROM:
+Para determinar qual será a imagem base para o dockerfile
+
+### MANTAINER:
+Define que escreve o Dockerfile
+
+### ADD:
+Trazer arquivos do host para o container, podendo trazer um .tar
+
+### CMD:
+
+### LABEL:
+Adicionar metadatas
+
+### COPY:
+Copia um elemento do host para o container
+
+### ENTRYPOINT:
+Para definir um processo como principal ´processo do seu container e casso esse processo morra o container tambem será finalizado
+
+### ENV:
+Para determinar variaveis de ambiente 
+```
+ENV teste="teste"
+```
+
+### EXPOSE:
+Expoem uma porta do container
+
+### RUN:
+Serve para executar comandos no seu dockerfile
+*OBS: Tentar rodar comando RUN apenas uma vez, concatenando os códigos. Pois rodar varios comandos RUN gera subcamadas de processamento que não interagem entre elas.
+
+### USER:
+Usuario default daquela imagem
+
+### WORKDIR:
+Definir o diretorio raiz do container
+
+### VOLUME
+Define o diretorio do volume
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #
 
