@@ -26,9 +26,10 @@ show_menu(){
     printf "${menu}**${number} 15)${menu} Alterar memoria do Container ${normal}\n"
     printf "${menu}**${number} 16)${menu} Alaterar CPU do Container ${normal}\n"
     printf "${menu}\nINSPECIONAR CONTAINERS EXPECIFICOS:${normal}\n\n"
-    printf "${menu}**${number} 17)${menu} Inspecionar do Container ${normal}\n"
+    printf "${menu}**${number} 17)${menu} Inspecionar Container ${normal}\n"
     printf "${menu}**${number} 18)${menu} Consumo de memoria do Container ${normal}\n"
     printf "${menu}**${number} 19)${menu} Consumo de CPU do Container ${normal}\n"
+    printf "${menu}**${number} 20)${menu} Volume montado corretamente ${normal}\n"
     printf "\n${menu}*********************************************${normal}\n"
     printf "Escolha sua opção de comando ou ${fgred}pressione 'x' para sair${normal}: "
     read opt
@@ -241,6 +242,12 @@ while [ $opt != '' ]
           read_container_name;
           sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
           option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu";
+        ;;
+
+        20)
+          read_container_name;
+          sudo docker inspect -f {{.Mounts}} $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker inspect -f {{.Mounts}} $(sudo docker ps -a -f "name=$container_name" -q)                              ";
         ;;
 
         x)exit;
