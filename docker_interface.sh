@@ -81,6 +81,20 @@ read_container_cpu(){
   echo $container_cpu;
 }
 
+read_volume(){
+  printf "\nDefinir volume(y/n):";
+  read has_volume;
+  if [ ! -z "$has_volume" -a "$has_volume" != " " -a "$has_volume" != "n" ]; then
+    printf "\nDiretorio Host:";
+    read host_dir;
+    printf "\nDiretorio Container:";
+    read container_dir;
+    command_volume="-v $host_dir:$container_dir"
+  else
+    command_volume="";
+  fi
+}
+
 clear
 show_menu
 while [ $opt != '' ]
@@ -116,7 +130,7 @@ while [ $opt != '' ]
           read container_name;
           
           docker_images;
-          printf "\n Nome da imagem:";
+          printf "\nNome da imagem:";
           read iso_name;
 
           printf "Consumo de memoria(usa a silga m, gb, etc):";
@@ -135,9 +149,10 @@ while [ $opt != '' ]
             command_cpu="";
           fi
 
+          read_volume;
 
           #sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
-          command_line="sudo docker run -ti --name $container_name $command_memory $command_cpu $iso_name";
+          command_line="sudo docker run -ti --name $container_name $command_volume $command_memory $command_cpu $iso_name";
           eval $command_line;
           option_picked $command_line;
         ;;
