@@ -131,7 +131,7 @@ buildar_imagem(){
   option_picked "sudo docker build -t $image_build_name:$image_build_version $image_build_dockerfile_dir";
 }
 
-buildar_imagem(){
+remover_imagem(){
   read_image_name;
   sudo docker rmi $(sudo docker images $image_name)
   option_picked "sudo docker rmi $(sudo docker images $image_name)";
@@ -364,7 +364,7 @@ read_image_build_info(){
 read_image_name(){
   docker_images;
   printf "Nome da image:";
-  read image_build_name;
+  read image_name;
 }
 
 ###########################################
