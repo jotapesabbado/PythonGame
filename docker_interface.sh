@@ -20,6 +20,7 @@ declare -a comandos_para_todos_container=(
   "Listar Imagens"
   "Remover todos os Containers inativos"
   "Buildar Imagem"
+  "Remover Imagem"
 );
 
 declare -a comandos_para_container_expecificos=(
@@ -81,6 +82,7 @@ declare -a switch_case_array=(
   "listar_imagens"
   "remover_todos_containers_inativos"
   "buildar_imagem"
+  "remover_imagem"
   "rodar_containers"
   "entrar_em_container_ativo"
   "iniciar_containers"
@@ -127,6 +129,12 @@ buildar_imagem(){
   read_image_build_info;
   sudo docker build -t $image_build_name:$image_build_version $image_build_dockerfile_dir
   option_picked "sudo docker build -t $image_build_name:$image_build_version $image_build_dockerfile_dir";
+}
+
+buildar_imagem(){
+  read_image_name;
+  sudo docker rmi $(sudo docker images $image_name)
+  option_picked "sudo docker rmi $(sudo docker images $image_name)";
 }
 
 rodar_containers(){
@@ -351,6 +359,12 @@ read_image_build_info(){
 
   printf "Diretorio do Dockerfile:";
   read image_build_dockerfile_dir;
+}
+
+read_image_name(){
+  docker_images;
+  printf "Nome da image:";
+  read image_build_name;
 }
 
 ###########################################
