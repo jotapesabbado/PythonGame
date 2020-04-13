@@ -189,26 +189,6 @@ Definir o diretorio raiz do container
 ### VOLUME
 Define o diretorio do volume
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 
 ## Soluções
@@ -219,4 +199,165 @@ Define o diretorio do volume
 * O virtual box tem umas tretas na hora de redimencionar uma maquina virtual, ai se tu tens uma interface que ocupa um espaço maior ela fica escondida. Esse link resolve tudo (https://www.youtube.com/watch?v=N6M1GUFw7R4)
 
 
+```shell
+      case $opt in
+        1) 
+          sudo docker ps;
+          option_picked "sudo docker ps";
+        ;;
 
+        2)
+          sudo docker ps -a; 
+          option_picked "sudo docker ps -a";
+        ;;
+
+        3)
+          sudo docker images; 
+          option_picked "sudo docker images";
+        ;;
+
+        4)
+          sudo docker rm -f $(sudo docker ps -a -q);
+          option_picked "sudo docker rm $(sudo docker ps -a -q)";
+        ;;
+
+        5)
+          sudo docker rm -f $(sudo docker ps -a -q);
+          option_picked "sudo docker rm $(sudo docker ps -a -q)";
+        ;;
+
+        6) 
+          printf "Nome do container:";
+          read container_name;
+          
+          docker_images;
+          printf "\nNome da imagem:";
+          read iso_name;
+
+          printf "Consumo de memoria(usa a silga m, gb, etc):";
+          read container_memory;
+          if [ ! -z "$container_memory" -a "$container_memory" != " " ]; then
+            command_memory="--memory $container_memory";
+          else
+            command_memory="";
+          fi
+
+          printf "Consumo de CPU:";
+          read container_cpu;
+          if [ ! -z "$container_cpu" -a "$container_cpu" != " " ]; then
+            command_cpu="--cpu-shares $container_cpu";
+          else
+            command_cpu="";
+          fi
+
+          read_volume;
+
+          #sudo docker run -ti --name $container_name --memory $container_memory --cpu-shares $container_cpu $iso_name;
+          command_line="sudo docker run -ti --name $container_name $command_volume $command_memory $command_cpu $iso_name";
+          eval $command_line;
+          option_picked $command_line;
+        ;;
+
+        7)
+          read_container_name;
+          sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker attach $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        8)
+          read_container_name;
+          sudo docker start $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker start $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        9)
+          read_container_name;
+          sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker stop $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+        
+        10)
+          read_container_name;
+          sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker pause $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        11)
+          read_container_name;
+          sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker unpause $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        12)
+          read_container_name;
+          sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker rm -f $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        13)
+          read_container_name;
+          sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker stats $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        14)
+          read_container_name;
+          sudo docker top $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker top $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        15)
+          read_container_name;
+          sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker logs $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        16)
+          read_container_name;
+          read_container_memory;
+          sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker update -m $container_memory $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        17)
+          read_container_name;
+          read_container_cpu;
+          sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker update --cpu-shares $container_cpu $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        18)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q)";
+        ;;
+
+        19)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i memory";
+        ;;
+
+        20)
+          read_container_name;
+          sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu;
+          option_picked "sudo docker inspect $(sudo docker ps -a -f "name=$container_name" -q) | grep -i cpu";
+        ;;
+
+        21)
+          read_container_name;
+          sudo docker inspect -f {{.Mounts}} $(sudo docker ps -a -f "name=$container_name" -q);
+          option_picked "sudo docker inspect -f {{.Mounts}} $(sudo docker ps -a -f "name=$container_name" -q)                              ";
+        ;;
+
+        x)exit;
+        ;;
+
+        \n)exit;
+        ;;
+
+        *)
+          option_picked "Escolha uma opções do menu";
+        ;;
+      esac
+```
