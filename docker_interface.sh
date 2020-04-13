@@ -134,7 +134,7 @@ buildar_imagem(){
 remover_imagem(){
   read_image_name;
   sudo docker rmi $(sudo docker images $image_name)
-  option_picked "sudo docker rmi $(sudo docker images $image_name)";
+  option_picked "sudo docker rmi -f $(sudo docker images $image_name)";
 }
 
 rodar_containers(){
