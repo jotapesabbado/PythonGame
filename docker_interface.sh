@@ -361,10 +361,11 @@ clear
 show_menu
 while [[ ! -z "$opt" ]]
 do
+  clear;
+
   if [ $opt = 'x' ]; then
     exit;
   else
-    clear;
 
     exist_opt=0;
     for key in "${!switch_case_array[@]}"; 
