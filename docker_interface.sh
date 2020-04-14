@@ -2,6 +2,9 @@
 
 ## GLOBAL
 
+#TODO:
+## tentar usar entrypoint para rodar o apache na imagem!
+
 ###########################################
 # Variaveis de estilização
 ###########################################
