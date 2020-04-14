@@ -28,6 +28,7 @@ declare -a comandos_para_imagens=(
   "Historico Imagem"
   "DockerHub push imagem"
   "DockerHub pull imagem"
+  "DockerHub search imagem"
 )
 
 declare -a comandos_para_container_expecificos=(
@@ -104,6 +105,7 @@ declare -a switch_case_array=(
   "historico_imagem"
   "dockerhub_push_imagem"
   "dockerhub_pull_imagem"
+  "dockerhub_search_imagem"
 
   # COMANDOS PARA CONTAINERS EXPECIFICOS
 
@@ -174,17 +176,30 @@ historico_imagem(){
 }
 
 renomear_imagem(){
-  printf "Escolha a image que será alterada!\n"
-  read_image_info;
-
-  printf "Novo nome da imagem:";
-  read new_image_name;
-
-  sudo docker tag $(sudo docker images $old_image_name -q);
-
+  read_image_rename;
+  sudo docker tag $(sudo docker images $old_image_name -q) $image_name:$image_version;
+  option_picked "sudo docker tag $(sudo docker images $old_image_name -q) $image_name:$image_version";
 }
-  "dockerhub_push_imagem"
-  "dockerhub_pull_imagem"
+
+dockerhub_push_imagem(){
+  valid_dockerhub_login;
+  read_image_info;
+  sudo docker push $username/$image_name:$image_version;
+  option_picked "sudo docker push $username/$image_name:$image_version";
+}
+
+dockerhub_pull_imagem(){
+  valid_dockerhub_login;
+  read_image_info;
+  sudo docker pull $username/$image_name:$image_version;
+  option_picked "sudo docker pull $username/$image_name:$image_version";
+}
+
+dockerhub_search_imagem(){
+  read_image_name;
+  sudo docker search $image_name;
+  option_picked "sudo docker search $image_name";
+}
 
 rodar_containers(){
   printf "Nome do container:";
@@ -417,6 +432,32 @@ read_image_name(){
   docker_images;
   printf "Nome da image:";
   read image_name;
+}
+
+read_image_rename(){
+  printf "VALORES ANTIGOS\n";
+  read_image_name;
+
+  old_image_name="$image_name"
+
+  printf "VALORES NOVOS\n";
+  read_image_name;
+  
+  printf "Versão da image:";
+  read image_version;
+
+}
+
+valid_dockerhub_login(){
+  printf "\nJá esta logado no Dockerhub(y/n):";
+  read valid_login;
+  
+  # Dessa forma o login sempre será validado
+
+  #if [ ! -z "$valid_login" -a "$valid_login" != " " -a "$valid_login" != "n" ]; then
+    sudo docker login
+    username=$(sudo docker info | sed '/Username:/!d;s/.* //');
+  #fi
 }
 
 ###########################################
