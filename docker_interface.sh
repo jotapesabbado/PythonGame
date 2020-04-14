@@ -17,11 +17,18 @@ fgred=`echo "\033[31m"`
 declare -a comandos_para_todos_container=(
   "Listar Containers"
   "Listar Containers inativos"
-  "Listar Imagens"
   "Remover todos os Containers inativos"
+);
+
+declare -a comandos_para_imagens=(
+  "Listar Imagens"
   "Buildar Imagem"
   "Remover Imagem"
-);
+  "Renomear Imagem"
+  "Historico Imagem"
+  "DockerHub push imagem"
+  "DockerHub pull imagem"
+)
 
 declare -a comandos_para_container_expecificos=(
   "Rodar Containers"
@@ -58,16 +65,21 @@ declare -A topic0=(
 )
 
 declare -A topic1=(
+  [title]='COMANDOS PARA IMAGENS'
+  [commands]='comandos_para_imagens'
+)
+
+declare -A topic2=(
   [title]='COMANDOS PARA CONTAINERS EXPECIFICOS'
   [commands]='comandos_para_container_expecificos'
 )
 
-declare -A topic2=(
+declare -A topic3=(
   [title]='UPDATE CONTAINERS EXPECIFICOS'
   [commands]='update_para_container_expecificos'
 )
 
-declare -A topic3=(
+declare -A topic4=(
   [title]='INSPECIONAR CONTAINERS EXPECIFICOS'
   [commands]='inspecionar_container_expecificos'
 )
@@ -77,12 +89,24 @@ declare -A topic3=(
 ###########################################
 
 declare -a switch_case_array=(
+  
+  # COMANDOS PARA TODOS OS CONTAINERS
   "listar_containers"
   "listar_containers_inativos"
-  "listar_imagens"
   "remover_todos_containers_inativos"
+
+  # COMANDOS PARA IMAGENS
+
+  "listar_imagens"
   "buildar_imagem"
   "remover_imagem"
+  "renomear_imagem"
+  "historico_imagem"
+  "dockerhub_push_imagem"
+  "dockerhub_pull_imagem"
+
+  # COMANDOS PARA CONTAINERS EXPECIFICOS
+
   "rodar_containers"
   "entrar_em_container_ativo"
   "iniciar_containers"
@@ -93,8 +117,14 @@ declare -a switch_case_array=(
   "status_container"
   "processos_container"
   "logs_container"
+  
+  # UPDATE CONTAINERS EXPECIFICOS
+
   "alterar_memoria_container"
   "alterar_cpu_container"
+
+  # INSPECIONAR CONTAINERS EXPECIFICOS
+
   "inspecionar_container"
   "consumo_memoria_container"
   "consumo_cpu_container"
@@ -127,15 +157,34 @@ remover_todos_containers_inativos(){
 
 buildar_imagem(){
   read_image_build_info;
-  sudo docker build -t $image_build_name:$image_build_version $image_build_dockerfile_dir
-  option_picked "sudo docker build -t $image_build_name:$image_build_version $image_build_dockerfile_dir";
+  sudo docker build -t $image_name:$image_version $image_build_dockerfile_dir
+  option_picked "sudo docker build -t $image_name:$image_version $image_build_dockerfile_dir";
 }
 
 remover_imagem(){
   read_image_name;
-  sudo docker rmi $(sudo docker images $image_name)
-  option_picked "sudo docker rmi -f $(sudo docker images $image_name)";
+  sudo docker rmi -f $(sudo docker images $image_name -q)
+  option_picked "sudo docker rmi -f $(sudo docker images $image_name -q)";
 }
+
+historico_imagem(){
+  read_image_info;
+  sudo docker history $image_name:$image_version;
+  option_picked "sudo docker history $image_name:$image_version";
+}
+
+renomear_imagem(){
+  printf "Escolha a image que será alterada!\n"
+  read_image_info;
+
+  printf "Novo nome da imagem:";
+  read new_image_name;
+
+  sudo docker tag $(sudo docker images $old_image_name -q);
+
+}
+  "dockerhub_push_imagem"
+  "dockerhub_pull_imagem"
 
 rodar_containers(){
   printf "Nome do container:";
@@ -351,14 +400,17 @@ read_volume(){
 }
 
 read_image_build_info(){
-  printf "Nome da image:";
-  read image_build_name;
-  
-  printf "Versão do build:";
-  read image_build_version;
+  read_image_info;
 
   printf "Diretorio do Dockerfile:";
   read image_build_dockerfile_dir;
+}
+
+read_image_info(){
+  read_image_name;
+  
+  printf "Versão da image:";
+  read image_version;
 }
 
 read_image_name(){
