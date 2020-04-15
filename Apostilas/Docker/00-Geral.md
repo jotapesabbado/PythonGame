@@ -198,6 +198,9 @@ Define o diretorio do volume
 ### *Virtual Box Linux não mostra todo o script*
 * O virtual box tem umas tretas na hora de redimencionar uma maquina virtual, ai se tu tens uma interface que ocupa um espaço maior ela fica escondida. Esse link resolve tudo (https://www.youtube.com/watch?v=N6M1GUFw7R4)
 
+### *CRIAR REGISTRY LOCAL*
+* Registry local substitui a necessidade de baixar as imagens do docker hub e de fazer acesso a internet, pois esse é um repositório de registros de imagens local. Seguir o passo a passo utilizando o arquivo de configuração YML deste link: https://hub.docker.com/r/hyper/docker-registry-web/. Para fazer os testes basta subir os container de registry e de serviço web e por fim testar no browser o caminho http://maquina_host_ip:8080/
+
 
 ```shell
       case $opt in
