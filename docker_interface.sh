@@ -21,6 +21,7 @@ declare -a comandos_para_todos_container=(
   "Listar Containers"
   "Listar Containers inativos"
   "Remover todos os Containers inativos"
+  "Ver Apostila"
 );
 
 declare -a comandos_para_imagens=(
@@ -98,6 +99,7 @@ declare -a switch_case_array=(
   "listar_containers"
   "listar_containers_inativos"
   "remover_todos_containers_inativos"
+  "ver_apostila"
 
   # COMANDOS PARA IMAGENS
 
@@ -150,14 +152,35 @@ listar_containers_inativos(){
   option_picked "sudo docker ps -a";
 }
 
-listar_imagens(){
-  sudo docker images; 
-  option_picked "sudo docker images";
+ver_apostila(){
+  printf "\nDependencias para ler a apostila no terminal:\n"
+  printf "\n* pandoc"
+  printf "\n* lynx"
+  printf "\nDeseja instalar e abrir mesmo assim(y/n):";
+  read install_md_viewer;
+
+  if [ ! -z "$install_md_viewer" -a "$install_md_viewer" != " " -a "$install_md_viewer" != "n" ]; then
+    
+    if ! [ -x "$(command -v pandoc)" ]; then
+      sudo apt-get install pandoc -y    
+    fi
+
+    if ! [ -x "$(command -v lynx)" ]; then
+      sudo apt-get install lynx -y    
+    fi
+
+    pandoc "$(sudo find / -name PythonGame)/Apostilas/Docker/00-Geral.md" | lynx -stdin
+  fi
 }
 
 remover_todos_containers_inativos(){
   sudo docker rm -f $(sudo docker ps -a -q);
   option_picked "sudo docker rm $(sudo docker ps -a -q)";
+}
+
+listar_imagens(){
+  sudo docker images; 
+  option_picked "sudo docker images";
 }
 
 buildar_imagem(){
