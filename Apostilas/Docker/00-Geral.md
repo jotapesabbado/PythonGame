@@ -19,6 +19,31 @@ sudo docker ps -a
 ```
 sudo docker run "nome da imagem"
 ```
+* Parametros de rede para o docker run
+```shell
+#Definir um dns para o container responder
+sudo docker run --dns 8.8.8.8
+
+#Define o hostname do container
+sudo docker run --hostname nomelegal
+
+#Criar vinculo entre container para conseguir pinga o link no linkado
+# Se dentro do container linkado eu rodar ping container_link irá funcionar
+
+sudo docker run --link container_link --name container_linkado
+
+# Expor apenas a porta do container
+sudo docker run --expose 80
+
+# Bind da porta do container com a porta do host, esse redirecionamento será feito pelo iptables, se eu quiser verificar esse redirect posso rodar iptables -t nat -L -n. Fazerndo um DNAT. Não é necessário alterar na mão as regras do iptables, o dokcer já faz isso muito bem
+sudo docker run --publish ou -p porta_host:porta_container
+
+# Personalizar o mac address
+sudo docker run --mac-address 12:34:de:b0:6b:61
+
+# Fazer com que todas as config do network sejam a do host e não a do container 
+sudo docker run --net=host
+```
 
 ### Rodar Containers nomeado:
 ```
