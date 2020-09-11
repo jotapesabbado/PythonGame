@@ -2,6 +2,35 @@
 ### Esta apostila possui o intuito de ser o guia para dúvidas em relação a sintax, setup e soluções encontradas em Docker.
 
 #
+## Instalação
+
+```shell
+# Docker
+sudo apt-get update -y
+curl -fsSl http://get.docker.com/ | sh
+
+# Docker Compose
+# https://docs.docker.com/compose/install/
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# Tive que trocar os acessos as variaveis de ambiente pelos seus respectivos valores, no caso Linux($(echo uname -s)) e x86_64. Por algum motivo não formatou a string corretamente 
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+# Docker Machine
+# https://github.com/docker/machine/releases
+# Observar a versão para instalar a mais atualizada
+
+curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+    chmod +x /tmp/docker-machine &&
+    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+
+# Git
+sudo apt install -y git-all
+
+```
 
 ## Comandos:
 ### Listar Containers:
@@ -168,6 +197,170 @@ sudo docker create -v diretorio/host:diretorio/container --name container_dataon
 
 // Dessa forma o container sera criado utilizando o volume do container dataonly como centralizador dos dados
 sudo docker run --volume-from container_dataonly 
+```
+
+## **Docker Machine (IMPORTANTE)**
+Docker machine é basicamente uma maquina host para manter os seus containers, a grande questão é que dessa forma voce pode na mesma maquina ter varios host's de dockermachine com varios containers. Neste video da pra ver a isntalação e de onde eu tirei essa definição do docker machine https://www.youtube.com/watch?v=DERATbSlB0s&list=PLf-O3X2-mxDkiUH0r_BadgtELJ_qyrFJ_&index=17
+
+## **Docker Compose (IMPORTANTE)**
+É uma forma de containerizar o hambiente da aplicação. Quase como um agrupador de dockerfiles. Ele agrupa todos os containers que fazem parte da sua aplicação.
+
+### build:
+
+```yml
+# Indica o caminho do seu Dockerfile
+build: .
+```
+
+### command:
+
+```yml
+# Comando a ser executado
+command: bundle exec thin -p 3000
+```
+
+### container_name:
+```yml
+# Indica um nome para o container
+container_name: my-web-container 
+```
+
+### dns:
+```yml
+# Indica o dns do servidos
+dns: 8.8.8.8
+```
+
+### dns_search:
+```yml
+# Expecifica um search domain
+dns_search: example.com
+```
+
+### dockerfile:
+
+```yml
+# Expecifica um arquivo de Dockerfile com nome alternativo
+dockerfile: Dokerfile-alternativo
+```
+
+### env_file:
+```yml
+# Expecifica um arquivo com variaveis de ambiente
+env_file: .env
+```
+
+### environment:
+```yml
+# Adiciona variaveis de ambiente
+environment: 
+  RACK_ENV: development
+```
+
+### expose:
+```yml
+# Expoe uma porta do container
+expose:
+  - "3000"
+  - "8000"
+```
+
+### external_links:
+```yml
+# "Linka" conteiners que não estão especificados no docker-compose atual
+external_links: 
+  - redis_1
+  - project_db_1:mysql
+```
+
+### extra_hosts:
+```yml
+# Adiciona ema entrada no /etc/host do container
+extra_hosts:
+  - "somehost:162.242.195.82"
+  - "otherhost:50.31.209.229"
+```
+
+### image:
+```yml
+# Indica uma imagem
+image: ubuntu
+```
+
+### labels:
+```yml
+# Adiciona metadados ao container 
+labels:
+  - com.exemple.description: "Accounting webapp"
+  - com.exemple.department: "Finance"
+```
+
+### links:
+```yml
+# Linka conteiners dentro do mesmo docker-compose
+links:
+  - db
+  - db:database
+```
+
+### log_drive:
+```yml
+# Indica o formato do log que sera gerado, por ex: syslog, json-file,etc
+log_drive: syslog
+
+# OU
+
+logging: 
+  drive: syslog
+
+```
+
+### log_opt:
+```yml
+# Indica onde mandar os logs, pode ser local ou em um syslog remoto
+log_opt:
+  syslog-address: "tcp://192.168.0.42:123"
+
+# OU
+
+logging:
+  drive: syslog
+  options:
+    syslog-address: "tcp://192.168.0.42:123"
+```
+
+### net:
+```yml
+# Modo de uso da rede
+net: "bridge"
+net: "host"
+```
+
+### ports:
+```yml
+# Expoe as portas do conteiner e do host
+ports:
+  - "3000"
+  - "8000:8000"
+```
+
+### volumes:
+```yml
+# Monta volumes no container
+volumes:
+  - /var/lib/mysql
+
+  - /opt/data:/var/lib/mysql
+
+  - .cache:/tmp/cache
+```
+
+### volumes_from:
+```yml
+# Monta volumes atraves de outros containers
+volumes_from:
+  - service_name
+  - service_name:ro
 ```
 
 ## Dockerfile
